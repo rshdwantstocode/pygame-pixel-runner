@@ -16,7 +16,7 @@ snail_surface = pygame.image.load('snail/snail1.png').convert_alpha()
 snail_rect = snail_surface.get_rect(bottomright=(600, 270))
 
 player_surf = pygame.image.load('player/player_walk_1.png').convert_alpha()
-player_rect = player_surf.get_rect(midbottom=(50, 270))
+player_rect = player_surf.get_rect(midbottom=(60, 270))
 print(type(player_rect))
 
 while True:
@@ -24,6 +24,9 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.MOUSEMOTION:
+            if player_rect.collidepoint(event.pos): print('collision')
+            
     screen.blit(sky_surface, (0,-100))
     screen.blit(ground_surface, (0, 270))
     screen.blit(text_surface, (300, 50))
@@ -31,5 +34,10 @@ while True:
     if snail_rect.left < -100: snail_rect.right = 800
     screen.blit(snail_surface, snail_rect)
     screen.blit(player_surf, player_rect)
+
+    # mouse_pos = pygame.mouse.get_pos()
+    # if player_rect.collidepoint(mouse_pos):
+    #     print(pygame.mouse.get_pressed())
+
     pygame.display.update()
     clock.tick(60)
